@@ -34,7 +34,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, related_name="products", on_delete=models.PROTECT)
     brand = models.ForeignKey(Brand, related_name="products", on_delete=models.SET_NULL, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.00'))])
-    available = models.BooleanField(default=True)
+    available = models.DecimalField(decimal_places=0, max_digits=10)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     # opcjonalnie: główny obraz

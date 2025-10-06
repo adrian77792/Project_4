@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{product.name}}</title>
+</head>
+<body>
+    <h1>{{ product.name }}</h1>
+
+    {% if product.main_image %}
+        <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
+    {% else %}
+        <p>No product image available</p>
+    {% endif %}
+
+    <p>Price: {{ product.price }} GB</p>
+
+    {% if product.available and product.available > 0 %}
+        <p>Available:{{product.available}}
+        </p>
+    {% else %}
+        <p>Out of stock</p>
+    {% endif %}
+
+    {% if product.description %}
+        <h2>Description</h2>
+        <p>{{ product.description }}</p>
+    {% else %}
+        <p>No description available.</p>
+    {% endif %}
+
+    <p><a href="{% url 'products:list' %}">← Back to product list</a></p>
+</body>
+</html>
