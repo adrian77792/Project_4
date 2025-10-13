@@ -10,19 +10,18 @@
   <ul>
     {% for product in products %}
     <li>
-      <a href="{{ product.get_absolute_url }}">{{ product.name }}</a> - {{ product.price }} £
+      <a href="{{ product.get_absolute_url }}">{{ product.name }}</a> - {{ product.price }} £ -    {% if product.available and product.available > 0 %}
+      <p>Available:{{product.available}}
+      </p>
+  {% else %}
+      <p>Out of stock</p>
+  {% endif %}
     </li>
             {% empty %}
     <li>Lack of products</li>
+
     {% endfor %}
 
-    {% if product.available and product.available > 0 %}
-        <p>Available:{{product.available}}
-        </p>
-    {% else %}
-        <p>Out of stock</p>
-    {% endif %}
-    
   </ul>
 </body>
 </html>
