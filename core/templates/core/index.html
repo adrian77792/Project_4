@@ -1,0 +1,100 @@
+{% load static %}
+
+{% block content %}
+
+<header>
+    <h1>Welcome to Our Store</h1>
+    <nav>
+        <ul class="categories-menu">
+            {% for category in categories %}
+            <li><a href="{% url 'products:category' category.slug %}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+</header>
+
+<section class="featured-products">
+    <h2>New Arrivals</h2>
+    <div class="product-list">
+        {% for product in new_products %}
+        <div class="product-card">
+            <a href="{{ product.get_absolute_url }}">
+                {% if product.main_image %}
+                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <img src="{% static 'images/placeholder.png' %}" alt="No image">
+                {% endif %}
+                <h3>{{ product.name }}</h3>
+                <p>${{ product.price }}</p>
+            </a>
+        </div>
+        {% empty %}
+            <p>No new products.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="outlet-products">
+    <h2>Outlet</h2>
+    <div class="product-list">
+        {% for product in outlet_products %}
+        <div class="product-card">
+            <a href="{{ product.get_absolute_url }}">
+                {% if product.main_image %}
+                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <img src="{% static 'images/placeholder.png' %}" alt="No image">
+                {% endif %}
+                <h3>{{ product.name }}</h3>
+                <p>${{ product.price }}</p>
+            </a>
+        </div>
+        {% empty %}
+            <p>No outlet products.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="lego-products">
+    <h2>LEGO</h2>
+    <div class="product-list">
+        {% for product in lego_products %}
+        <div class="product-card">
+            <a href="{{ product.get_absolute_url }}">
+                {% if product.main_image %}
+                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <img src="{% static 'images/placeholder.png' %}" alt="No image">
+                {% endif %}
+                <h3>{{ product.name }}</h3>
+                <p>${{ product.price }}</p>
+            </a>
+        </div>
+        {% empty %}
+            <p>No LEGO products.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="gaming-products">
+    <h2>Gaming</h2>
+    <div class="product-list">
+        {% for product in gaming_products %}
+        <div class="product-card">
+            <a href="{{ product.get_absolute_url }}">
+                {% if product.main_image %}
+                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <img src="{% static 'images/placeholder.png' %}" alt="No image">
+                {% endif %}
+                <h3>{{ product.name }}</h3>
+                <p>${{ product.price }}</p>
+            </a>
+        </div>
+        {% empty %}
+            <p>No Gaming products.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
