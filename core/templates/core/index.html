@@ -1,7 +1,14 @@
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tatko</title>
+</head>
 
-{% block content %}
-
+<body>
 <header>
     <h1>Welcome to Our Store</h1>
     <nav>
@@ -12,6 +19,10 @@
         </ul>
     </nav>
 </header>
+
+<div class="train-container">
+    <img src="{% static 'images/train.png' %}" alt="train" class="train">
+    </div>
 
 <section class="featured-products">
     <h2>New Arrivals</h2>
@@ -96,5 +107,4 @@
         {% endfor %}
     </div>
 </section>
-
-{% endblock %}
+</body>

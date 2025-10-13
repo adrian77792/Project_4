@@ -23,7 +23,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("products/", include("products.urls")),
-    path('', lambda request: redirect('products:list')),  #  przekierowanie na listę produktów
+    #path('', lambda request: redirect('products:list')), 
+    path("", include("core.urls")),
     
 ]
 if settings.DEBUG:
