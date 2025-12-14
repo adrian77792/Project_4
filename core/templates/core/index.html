@@ -9,102 +9,28 @@
 </head>
 
 <body>
-<header>
-    <h1>Welcome to Our Store</h1>
-    <nav>
-        <ul class="categories-menu">
-            {% for category in categories %}
-            <li><a href="{% url 'products:category' category.slug %}">{{ category.name }}</a></li>
-            {% endfor %}
-        </ul>
-    </nav>
-</header>
+    <h2>KATEGORIE ZABAWEK</h2>
+<div class="categories">
+    {% for cat in categories %}
 
-<div class="train-container">
-    <img src="{% static 'images/train.png' %}" alt="train" class="train">
-    </div>
+            {{ cat.name }}
+        </a>
+    {% endfor %}
+</div>
 
-<section class="featured-products">
-    <h2>New Arrivals</h2>
-    <div class="product-list">
-        {% for product in new_products %}
+<h2>NOWOŚCI</h2>
+<div class="products">
+    {% for p in products %}
         <div class="product-card">
-            <a href="{{ product.get_absolute_url }}">
-                {% if product.main_image %}
-                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
-                {% else %}
-                    <img src="{% static 'images/placeholder.png' %}" alt="No image">
-                {% endif %}
-                <h3>{{ product.name }}</h3>
-                <p>${{ product.price }}</p>
-            </a>
+            {% if p.main_image %}
+                <img src="{{ p.main_image.url }}" alt="{{ p.name }}">
+            {% else %}
+                <p>No product image available</p>
+            {% endif %}
+            <h4>{{ p.name }}</h4>
+            <p>{{ p.price }} PLN</p>
         </div>
-        {% empty %}
-            <p>No new products.</p>
-        {% endfor %}
-    </div>
-</section>
-
-<section class="outlet-products">
-    <h2>Outlet</h2>
-    <div class="product-list">
-        {% for product in outlet_products %}
-        <div class="product-card">
-            <a href="{{ product.get_absolute_url }}">
-                {% if product.main_image %}
-                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
-                {% else %}
-                    <img src="{% static 'images/placeholder.png' %}" alt="No image">
-                {% endif %}
-                <h3>{{ product.name }}</h3>
-                <p>${{ product.price }}</p>
-            </a>
-        </div>
-        {% empty %}
-            <p>No outlet products.</p>
-        {% endfor %}
-    </div>
-</section>
-
-<section class="lego-products">
-    <h2>LEGO</h2>
-    <div class="product-list">
-        {% for product in lego_products %}
-        <div class="product-card">
-            <a href="{{ product.get_absolute_url }}">
-                {% if product.main_image %}
-                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
-                {% else %}
-                    <img src="{% static 'images/placeholder.png' %}" alt="No image">
-                {% endif %}
-                <h3>{{ product.name }}</h3>
-                <p>${{ product.price }}</p>
-            </a>
-        </div>
-        {% empty %}
-            <p>No LEGO products.</p>
-        {% endfor %}
-    </div>
-</section>
-
-<section class="gaming-products">
-    <h2>Gaming</h2>
-    <div class="product-list">
-        {% for product in gaming_products %}
-        <div class="product-card">
-            <a href="{{ product.get_absolute_url }}">
-                {% if product.main_image %}
-                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
-                {% else %}
-                    <img src="{% static 'images/placeholder.png' %}" alt="No image">
-                {% endif %}
-                <h3>{{ product.name }}</h3>
-                <p>${{ product.price }}</p>
-            </a>
-        </div>
-        {% empty %}
-            <p>No Gaming products.</p>
-        {% endfor %}
-    </div>
-</section>
+    {% endfor %}
+</div>
 </body>
+    

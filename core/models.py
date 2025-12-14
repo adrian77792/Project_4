@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.core.validators import MinValueValidator
 from decimal import Decimal
 
+## to jest model w core, nie ma tutaj produktów, trzeba to potem sprzatnąć
 class Category(models.Model):
     name = models.CharField(max_length=120, unique=True)
     slug = models.SlugField(max_length=140, unique=True, blank=True)
