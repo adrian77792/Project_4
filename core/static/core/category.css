@@ -1,0 +1,30 @@
+.section-title {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.categories {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.category-tile {
+    padding: 14px 28px;
+    border-radius: 8px;
+    background-color: var(--cat-color);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    min-width: 120px;
+    text-align: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.category-tile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+
