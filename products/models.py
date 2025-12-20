@@ -1,13 +1,15 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from decimal import Decimal
+from colorfield.fields import ColorField
 
 class Category(models.Model):
     name = models.CharField(max_length=120, unique=True)
     slug = models.SlugField(max_length=140, unique=True, blank=True)
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children', on_delete=models.SET_NULL)
+    color = ColorField(default='#777777')
  
     class Meta:
         verbose_name_plural = "kategorie"
@@ -34,6 +36,16 @@ class Product(models.Model):
     category = models.ForeignKey(Category, related_name="products", on_delete=models.PROTECT)
     brand = models.ForeignKey(Brand, related_name="products", on_delete=models.SET_NULL, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.00'))])
+    discount = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(99),
+        ],
+        help_text="Discount (0–99)"
+    )
     available = models.DecimalField(decimal_places=0, max_digits=10)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator
 from decimal import Decimal
 
 ## to jest model w core, nie ma tutaj produktów, trzeba to potem sprzatnąć
@@ -38,17 +38,6 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.00'))])
     stock = models.PositiveIntegerField(default=0)
     available = models.BooleanField(default=True)
-    discount = models.PositiveSmallIntegerField(
-        null=True,
-        blank=True,
-        default=0,
-        validators=[
-            MinValueValidator(0),
-            MaxValueValidator(99),
-        ],
-        help_text="Discount (0–99)"
-    )
-
     is_new = models.BooleanField(default=False)
     is_outlet = models.BooleanField(default=False)
     is_lego = models.BooleanField(default=False)
