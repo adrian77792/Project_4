@@ -22,3 +22,11 @@
       left: 100vw; /* do końca ekranu */
     }
   }
+
+  .bg-cream {
+    background-color: #F9EFDB; /* krem */
+  }
+  
+  .bg-white {
+    background-color: #ffffff;
+  }

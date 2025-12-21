@@ -25,9 +25,11 @@
 
 <h2>NOWOŚCI</h2>
 <div class="products">
-  {% for p in products %}
+  {% for p in latest_products %}
   <div class="product-card">
-    <div class="badge">New!</div>
+    {% if p.discount %}
+      <div class="badge">DISCOUNT!</div>
+    {% endif %}
 
     {% if p.main_image %}
       <img src="{{ p.main_image.url }}" alt="{{ p.name }}">
@@ -41,10 +43,15 @@
     </p>
 
     <div class="product-price-row">
-      {% if p.old_price %}
-        <span class="old-price">{{ p.old_price }} PLN</span>
-      {% endif %}
-      <span class="price">{{ p.price }} PLN</span>
+      <div class="discount-box">-20%</div>
+      <div class="price-box">
+        {% if p.discount %}
+          <span class="old-price">{{ p.price }} GB</span>
+          <span class="price">{{ p.discounted_price }} GB</span>
+        {% else %}
+          <span class="price">{{ p.price }} GB</span>
+        {% endif %}
+      </div>
     </div>
 
     <div class="product-actions">
@@ -55,11 +62,13 @@
   {% endfor %}
 </div>
 
-<h2>Promocje</h2>
-<div class="products">
-  {% for p in products %}
-  <div class="product-card">
-    <div class="badge">New!</div>
+<h2 class="bg-cream">Promocje</h2>
+<div class="bg-cream products">
+  {% for p in discounted_products %}
+  <div class="bg-cream product-card">
+    {% if p.discount %}
+      <div class="badge">DISCOUNT!</div>
+    {% endif %}
 
     {% if p.main_image %}
       <img src="{{ p.main_image.url }}" alt="{{ p.name }}">
