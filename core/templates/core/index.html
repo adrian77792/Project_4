@@ -1,50 +1,40 @@
+{% extends "core/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="{% static 'core/style.css' %}">
-    <link rel="stylesheet" href="{% static 'core/category.css' %}">
-    <link rel="stylesheet" href="{% static 'core/products.css' %}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tatko</title>
-</head>
 
-<body>
-    <h2 class="section-title">KATEGORIE ZABAWEK</h2>
+{% block title %}Tatko - Strona główna{% endblock %}
 
-<div class="categories">
-    {% for cat in categories %}
-        <a 
-           class="category-tile"
-           style="--cat-color: {{ cat.color|default:'#777' }}">
-            {{ cat.name }}
-        </a>
-    {% endfor %}
+{% block content %}
+
+<div style="background-color: var(--background_default_color); color: var(--text_default_color);">
+  <h2 class="section-title" style="color: var(--action_primary_default_color);">KATEGORIE ZABAWEK</h2>
+
+  <div class="categories">
+      {% for cat in categories %}
+          <a 
+            class="category-tile"
+            style="--cat-color: {{ cat.color|default:'#777' }};">
+              {{ cat.name }}
+          </a>
+      {% endfor %}
+  </div>
 </div>
 
-<h2>NOWOŚCI</h2>
-<div class="products">
-  {% for p in latest_products %}
-  <div class="product-card">
-    {% if p.discount %}
-      <div class="badge">DISCOUNT!</div>
-    {% endif %}
-
-    {% if p.main_image %}
-      <img src="{{ p.main_image.url }}" alt="{{ p.name }}">
-    {% else %}
-      <p>No product image available</p>
-    {% endif %}
-
-    <h4 class="product-name">{{ p.name }}</h4>
-    <p class="product-desc">
-      Opis zabawki tu może się znajdować, kilka słów o produkcie...
-    </p>
-
-    <div class="product-price-row">
-      <div class="discount-box">-20%</div>
-      <div class="price-box">
+<div>
+  <h2 style="color: var(--action_primary_default_color);">NOWOŚCI</h2>
+  <div class="products">
+    {% for p in latest_products %}
+    <div class="product-card">
+      {% if p.discount %}
+        <div class="badge">DISCOUNT!</div>
+      {% endif %}
+      {% if p.main_image %}
+        <img src="{{ p.main_image.url }}" alt="{{ p.name }}">
+      {% else %}
+        <p>No product image available</p>
+      {% endif %}
+      <h4 class="product-name">{{ p.name }}</h4>
+      <p class="product-desc">Opis zabawki tu może się znajdować...</p>
+      <div class="product-price-row">
         {% if p.discount %}
           <span class="old-price">{{ p.price }} GB</span>
           <span class="price">{{ p.discounted_price }} GB</span>
@@ -52,50 +42,44 @@
           <span class="price">{{ p.price }} GB</span>
         {% endif %}
       </div>
+      <div class="product-actions">
+        <button class="btn-primary">DO KOSZYKA</button>
+        <button class="btn-secondary">❤</button>
+      </div>
     </div>
-
-    <div class="product-actions">
-      <button class="btn-primary">DO KOSZYKA</button>
-      <button class="btn-secondary">❤</button>
-    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>
 
-<h2 class="bg-cream">Promocje</h2>
-<div class="bg-cream products">
-  {% for p in discounted_products %}
-  <div class="bg-cream product-card">
-    {% if p.discount %}
-      <div class="badge">DISCOUNT!</div>
-    {% endif %}
-
-    {% if p.main_image %}
-      <img src="{{ p.main_image.url }}" alt="{{ p.name }}">
-    {% else %}
-      <p>No product image available</p>
-    {% endif %}
-
-    <h4 class="product-name">{{ p.name }}</h4>
-    <p class="product-desc">
-      Opis zabawki tu może się znajdować, kilka słów o produkcie...
-    </p>
-
-    <div class="product-price-row">
+<div class="bg-cream">
+  <h2 style="color: var(--action_primary_default_color);">PROMOCJE</h2>
+  <div class="products">
+    {% for p in discounted_products %}
+    <div class="product-card">
       {% if p.discount %}
-        <span class="old-price">{{ p.price }} GB</span>
-        <span class="price">{{ p.discounted_price }} GB</span>
-        {% else %}
-        <span class="price">{{ p.price }} GB</span>
+        <div class="badge">DISCOUNT!</div>
       {% endif %}
+      {% if p.main_image %}
+        <img src="{{ p.main_image.url }}" alt="{{ p.name }}">
+      {% else %}
+        <p>No product image available</p>
+      {% endif %}
+      <h4 class="product-name">{{ p.name }}</h4>
+      <p class="product-desc">Opis zabawki tu może się znajdować...</p>
+      <div class="product-price-row">
+        {% if p.discount %}
+          <span class="old-price">{{ p.price }} GB</span>
+          <span class="price">{{ p.discounted_price }} GB</span>
+        {% else %}
+          <span class="price">{{ p.price }} GB</span>
+        {% endif %}
+      </div>
+      <div class="product-actions">
+        <button class="btn-primary">DO KOSZYKA</button>
+        <button class="btn-secondary">❤</button>
+      </div>
     </div>
-
-    <div class="product-actions">
-      <button class="btn-primary">DO KOSZYKA</button>
-      <button class="btn-secondary">❤</button>
-    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>
-</body>
-    
+{% endblock %}

@@ -1,5 +1,4 @@
 .section-title {
-    text-align: center;
     font-weight: 700;
     margin-bottom: 20px;
 }
@@ -9,6 +8,7 @@
     gap: 16px;
     justify-content: center;
     flex-wrap: wrap;
+   
 }
 
 .category-tile {
