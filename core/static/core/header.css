@@ -1,0 +1,131 @@
+.top-bar {
+    background: #f5f5f5;
+    font-size: 13px;
+    padding: 6px 40px;
+}
+
+.top-bar-left span {
+    margin-right: 20px;
+}
+
+.main-header {
+    background: var(--background_default_color);
+    padding: 15px 40px;
+}
+
+.header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    height: 58px;
+}
+
+.header-row .left {
+    display: flex;
+    gap: 20px;
+}
+
+.header-row .left span {
+    display: inline-flex;
+    align-items: center;   /* wyrównanie SVG do tekstu */
+    gap: 6px;              /* odstęp ikona–tekst */
+    font-size: 14px;
+    color: var(--text_default_color);
+}
+
+.header-row .left svg {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text_default_color);
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.search-box input {
+    width: 280px;
+    padding: 8px 12px 8px 42px; 
+    border: 1px solid #dcdcdc; 
+    border-radius: 6px;        
+    background-color: #fff;
+    color: var(--text_default_color);
+    font-size: 14px;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #c8c8c8;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.04);
+}
+
+nav {
+    background-color: #f3d19c;
+    width: 100%;         
+    height: 80px;
+    padding: 0;           
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.nav-inner {
+    width: 100%;
+    max-width: 1200px;    
+    padding: 0 40px;      
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-nav {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-links a {
+    color: #2a1e0f;
+    text-decoration: none;
+    font-weight: 600;
+    margin-right: 25px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.cart {
+    font-weight: 600;
+    color: #2a1e0f;
+}
+
+.h-btn-primary {
+    background: var(--action_primary_default_color);
+    color: #fff;
+    flex: 1;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.h-btn-secondary {
+    background: var(--action_secondary_default_color);
+    color: #fff;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}

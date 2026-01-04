@@ -5,6 +5,18 @@
 
 {% block content %}
 
+
+{% include "core/header.html" %}
+<div class="svg-container">
+    <!-- SVG z pliku -->
+    <img src="{% static 'core/images/Frame 8.svg' %}" alt="Logo" />
+
+    <!-- PNG z pliku -->
+    <img src="{% static 'core/images/Frame 7.png' %}" alt="Zdjecie" />
+
+</div>
+  
+
 <div style="background-color: var(--background_default_color); color: var(--text_default_color);">
   <h2 class="section-title" style="color: var(--action_primary_default_color);">KATEGORIE ZABAWEK</h2>
 
@@ -19,7 +31,7 @@
   </div>
 </div>
 
-<div>
+<div class="bg-white">
   <h2 style="color: var(--action_primary_default_color);">NOWOŚCI</h2>
   <div class="products">
     {% for p in latest_products %}
@@ -52,7 +64,7 @@
 </div>
 
 <div class="bg-cream">
-  <h2 style="color: var(--action_primary_default_color);">PROMOCJE</h2>
+  <h2 style="color: var(--action_primary_default_color);">POLECANE</h2>
   <div class="products">
     {% for p in discounted_products %}
     <div class="product-card">

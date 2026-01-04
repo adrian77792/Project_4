@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <title>{% block title %}Tatko{% endblock %}</title>
     {% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'core/style.css' %}">
     <link rel="stylesheet" href="{% static 'core/category.css' %}">
     <link rel="stylesheet" href="{% static 'core/products.css' %}">
+    <link rel="stylesheet" href="{% static 'core/header.css' %}">
+   
     <style>
         :root {
             --background_default_color: {{ theme.background_default_color|default:"#F7F0DB" }};
@@ -18,7 +21,7 @@
     </style>
     {% endblock %}
 </head>
-<body >
+<body style="background-color: var(--background_default_color); color: var(--text_default_color);">
     {% block content %}{% endblock %}
 </body>
 </html>

@@ -71,7 +71,7 @@
   
   .btn-primary {
     flex: 1;
-    background: #C9452D;
+    background: var(--action_primary_default_color);
     color: #fff;
     border: none;
     padding: 8px 10px;
@@ -81,7 +81,7 @@
   
   .btn-secondary {
     width: 40px;
-    background: #4F84A6;
+    background: var(--action_secondary_default_color);
     color: #fff;
     border: none;
     padding: 8px 10px;
