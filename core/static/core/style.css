@@ -10,6 +10,14 @@
 
   .svg-container {
     display: flex;
-    justify-content: center; 
+    /*justify-content: center; */
     align-items: center;    
   }
+
+
+  .container {
+    width: 100%;
+    max-width: 1250px;  /* albo 1400px */
+    margin: 0 auto;
+    padding: 10px 40px;    /* stały margines wewnętrzny */
+}

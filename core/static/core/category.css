@@ -6,19 +6,20 @@
 .categories {
     display: flex;
     gap: 16px;
-    justify-content: center;
+    /*justify-content: center;*/
     flex-wrap: wrap;
+    margin-bottom: 20px;
    
 }
 
 .category-tile {
-    padding: 14px 28px;
+    padding: 28px 28px;
     border-radius: 8px;
     background-color: var(--cat-color);
     color: #fff;
     text-decoration: none;
     font-weight: 600;
-    min-width: 120px;
+    min-width: 139px;
     text-align: center;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
