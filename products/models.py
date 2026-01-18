@@ -56,6 +56,10 @@ class Product(models.Model):
         ordering = ['-created_at']
         indexes = [models.Index(fields=['name']), models.Index(fields=['price'])]
  
+    def short(self, limit=100):
+        text = self.description
+        return text if len(text) <= limit else text[:limit] + '...'
+
     def save(self, *args, **kwargs):
         if not self.slug:
             base = slugify(self.name)[:200]

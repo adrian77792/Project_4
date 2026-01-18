@@ -21,3 +21,52 @@
     margin: 0 auto;
     padding: 10px 40px;    /* stały margines wewnętrzny */
 }
+
+.btn-fonts {
+font-family: Poppins;
+font-weight: 600;
+font-style: SemiBold;
+font-size: 12px;
+line-height: 100%;
+letter-spacing: 0%;
+vertical-align: middle;
+}
+
+.prodact-description {
+font-family: Fredoka;
+font-weight: 400;
+font-style: Medium;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: 0%;
+vertical-align: middle;
+}
+
+.main-categories {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.product-main {
+  font-family: Fredoka;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.category-card {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;     /* SemiBold */
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0;
+  vertical-align: middle;
+}
