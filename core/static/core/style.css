@@ -1,25 +1,35 @@
 
-  .bg-cream {
+.bg-cream {
     background-color: #F9EFDB; /* krem */
   }
   
-  .bg-white {
+.bg-white {
     background-color: #ffffff;
   }
 
 
-  .svg-container {
+.svg-container {
     display: flex;
     /*justify-content: center; */
     align-items: center;    
   }
 
 
-  .container {
+.container {
     width: 100%;
     max-width: 1250px;  /* albo 1400px */
     margin: 0 auto;
     padding: 10px 40px;    /* stały margines wewnętrzny */
+}
+
+.hero {
+  width: 100%;
+}
+
+.hero img{
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .btn-fonts {
@@ -70,3 +80,4 @@ vertical-align: middle;
   letter-spacing: 0;
   vertical-align: middle;
 }
+
