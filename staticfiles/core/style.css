@@ -1,24 +1,179 @@
-.train-container {
-    position: relative;
-    height: 120px; /* wysokość toru */
-    overflow: hidden;
-    background: transparent;
+
+.bg-cream {
+    background-color: #F9EFDB; /* krem */
   }
-   
-  .train {
-    position: absolute;
-    bottom: 0;
-    left: -200px; /* start poza ekranem */
-    height: 100px;
-    animation: trainGo 8s linear infinite;
+  
+.bg-white {
+    background-color: #ffffff;
   }
-   
-  /* animacja przejazdu */
-  @keyframes trainGo {
-    0% {
-      left: -200px;
-    }
-    100% {
-      left: 100vw; /* do końca ekranu */
-    }
+
+
+.svg-container {
+    display: flex;
+    /*justify-content: center; */
+    align-items: center;    
   }
+
+
+.container {
+    width: 100%;
+    max-width: 1250px;  /* albo 1400px */
+    margin: 0 auto;
+    padding: 10px 40px;    /* stały margines wewnętrzny */
+}
+
+.hero {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+
+.hero img{
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-container {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-container img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-100%, -50%);
+  text-align: center;
+}
+
+
+.hero-title-main {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 800;
+  color: white;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  text-align: left;
+
+}
+
+
+.hero-title-sub {
+  margin: 10px 0 25px 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: black;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  text-align: left;
+
+}
+.hero-btn-left {
+  text-align: left;
+}
+
+.hero-btn-inside {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 6px 16px;
+  height: 36px;
+
+  background: #D3442A;
+  border-radius: 8px;
+  border: none;
+
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition: background 0.15s ease, transform 0.08s ease, box-shadow 0.15s ease;
+}
+
+.hero-btn-inside:hover {
+  background: #bb3a23;
+}
+
+
+.hero-btn-inside:active {
+  transform: translateY(1px);
+}
+
+.hero-btn-inside:visited {
+  color: #FFFFFF;
+}
+
+.btn-fonts {
+font-family: Poppins;
+font-weight: 600;
+font-style: SemiBold;
+font-size: 12px;
+line-height: 100%;
+letter-spacing: 0%;
+vertical-align: middle;
+}
+
+.prodact-description {
+font-family: Fredoka;
+font-weight: 400;
+font-style: Medium;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: 0%;
+vertical-align: middle;
+}
+
+.main-categories {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.product-main {
+  font-family: Fredoka;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.category-card {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;     /* SemiBold */
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0;
+  vertical-align: middle;
+}
+

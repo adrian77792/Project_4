@@ -8,10 +8,18 @@
 
 {% include "core/header.html" %}
 <div class="hero">
-<div class="svg-container">
+<div class="hero-container">
 
     <img src="{% static 'core/images/frame5.png' %}" alt="Logo" />
-
+    <div class="hero-content">
+      <div class="hero-title-main">Bezpieczne zabawki</div>
+      <div class="hero-title-sub">dla Twojego Malucha!</div>
+      <div class="hero-btn-left">
+        <button class="hero-btn-inside">
+          Sprawdź nowości
+        </button>
+      </div>  
+    </div>
 
 </div>
 </div>
@@ -53,10 +61,15 @@
       <p class="product-desc prodact-description">{{ p.short }}</p>
       <div class="product-price-row">
         {% if p.discount %}
-          <span class="old-price">{{ p.price }} GB</span>
-          <span class="price">{{ p.discounted_price }} GB</span>
+          <span class="discount-badge">{{ p.discount }} %</span>
+          <div class="price-group">
+            <span class="old-price">{{ p.price }} GB</span>
+            <span class="price">{{ p.discounted_price }} GB</span>
+          </div>  
         {% else %}
-          <span class="price">{{ p.price }} GB</span>
+          <div class="price-group">
+            <span class="price">{{ p.price }} GB</span>
+          </div>    
         {% endif %}
       </div>
       <div class="product-actions">
@@ -105,10 +118,15 @@
       <p class="product-desc prodact-description">{{ p.short }}</p>
       <div class="product-price-row">
         {% if p.discount %}
-          <span class="old-price">{{ p.price }} GB</span>
-          <span class="price">{{ p.discounted_price }} GB</span>
+          <span class="discount-badge">{{ p.discount }} %</span>
+          <div class="price-group">
+            <span class="old-price">{{ p.price }} GB</span>
+            <span class="price">{{ p.discounted_price }} GB</span>
+          </div>  
         {% else %}
-          <span class="price">{{ p.price }} GB</span>
+          <div class="price-group">
+            <span class="price">{{ p.price }} GB</span>
+          </div>   
         {% endif %}
       </div>
       <div class="product-actions">
