@@ -1,14 +1,14 @@
 .products {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 30px;
     /*justify-content: center;*/
   }
   
   .product-card {
     position: relative;
-    width: 260px;
-    padding: 15px 15px 15px 0px;
+    width: 290px;
+    padding: 15px 0px 15px 0px;
     display: flex;
     flex-direction: column;
   }
@@ -17,7 +17,7 @@
     width: 100%;
     height: 180px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 10px;
   }
   
   .badge {
@@ -30,8 +30,8 @@
     font-size: 16px;
     font-weight: 800;
     padding: 4px 8px;
-    border-top-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
   }
   
   .product-name {
@@ -59,10 +59,17 @@
 }
   
   .old-price {
-    text-decoration: line-through;
+
     color: #35322D;
-    font-size: 12px;
     font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: right;
+    vertical-align: bottom;
+    text-decoration: line-through;
+
   }
   
   .price {
@@ -84,9 +91,18 @@
     color: #fff;
     border: none;
     padding: 8px 10px;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    display: inline-flex;
   }
+
+  .btn-primary img {
+    display: block;   
+  }
+  
   
   .btn-secondary {
     width: 40px;
@@ -94,8 +110,12 @@
     color: #fff;
     border: none;
     padding: 8px 10px;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    display: inline-flex;
   }
 
   .product-price-row {
@@ -117,7 +137,7 @@
     align-items: center;
     padding: 3px 6px;
     background: #F9AA2F;
-    border-radius: 20px;
+    border-radius: 10px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 16px;

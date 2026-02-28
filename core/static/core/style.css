@@ -12,6 +12,7 @@ html, body {
   
 .bg-white {
     background-color: #ffffff;
+    padding-bottom: 20px;
   }
 
 
@@ -26,7 +27,7 @@ html, body {
     width: 100%;
     max-width: 1250px;  /* albo 1400px */
     margin: 0 auto;
-    padding: 10px 40px;    /* stały margines wewnętrzny */
+    padding: 10px 40px 10px 40px;  
 }
 
 .hero {
@@ -135,8 +136,7 @@ html, body {
 .btn-fonts {
 font-family: Poppins;
 font-weight: 600;
-font-style: SemiBold;
-font-size: 12px;
+font-size: 14px;
 line-height: 100%;
 letter-spacing: 0%;
 vertical-align: middle;

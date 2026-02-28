@@ -1,0 +1,36 @@
+{% load static %}
+<div class="product-card">
+    {% if product.discount %}
+      <div class="badge">DISCOUNT</div>
+    {% endif %}
+    {% if product.main_image %}
+      <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
+    {% else %}
+      <p>No product image available</p>
+    {% endif %}
+    <h4 class="product-name product-main">{{ product.name }}</h4>
+    <p class="product-desc prodact-description">{{ product.short }}</p>
+    <div class="product-price-row">
+      {% if product.discount %}
+        <span class="discount-badge">{{ product.discount }} %</span>
+        <div class="price-group">
+          <span class="old-price">{{ product.price }} GB</span>
+          <span class="price">{{ product.discounted_price }} GB</span>
+        </div>  
+      {% else %}
+        <div class="price-group">
+          <span class="price">{{ product.price }} GB</span>
+        </div>    
+      {% endif %}
+    </div>
+    <div class="product-actions">
+      <button class="btn-primary">
+        <img src="{% static 'core/images/Cart.svg' %}" alt="Cart" style="width:24px; height:24px;" />      
+        <span class="btn-fonts">ADD TO CART</span>
+      </button>
+      <button class="btn-secondary">
+        <img src="{% static 'core/images/Heart.svg' %}" alt="Cart" style="width:24px; height:24px;" /> 
+      </button>
+    </div>
+  </div>
+  
