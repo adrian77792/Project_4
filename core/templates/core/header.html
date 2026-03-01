@@ -25,16 +25,19 @@
     
         <div class="nav-inner">
             <div class="nav-links">
-                <a href="#">
-                    <img src="{% static 'core/images/button.svg' %}" alt="Logo" />
+                <a class = "n-menu-element" href="#">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 10H4V22H20V10H22L12 2L2 10Z" fill="currentColor"/>
+                    </svg>
+                        
                         
                 </a>
 
-                <a class="h-menu-link" href="#">TOYS</a>
-                <a class="h-menu-link" href="#">CLOTHES</a>
-                <a class="h-menu-link" href="#">NEWS</a>
-                <a class="h-menu-link" href="#">SPECIAL OFFER</a>
-                <a class="h-menu-link" href="#">ABOUT US</a>
+                <a class="n-menu-element h-menu-link" href="#">TOYS</a>
+                <a class="n-menu-element h-menu-link" href="#">CLOTHES</a>
+                <a class="n-menu-element h-menu-link" href="#">NEWS</a>
+                <a class="n-menu-element h-menu-link" href="#">SPECIAL OFFER</a>
+                <a class="n-menu-element h-menu-link" href="#">ABOUT US</a>
 
             </div>
 
@@ -49,9 +52,14 @@
                 </button>
             </div>
 
-            <div class="cart">
-                <img src="{% static 'core/images/iconcontainer.svg' %}" alt="Logo" />
-                <a class="h-menu-link" href="#">Add to cart</a>
+            <div class="n-menu-element cart">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 18H9V12H11V18Z" fill="currentColor"/>
+                    <path d="M15 12V18H13V12H15Z" fill="currentColor"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.125 8H22L19 22H5L2 8H7.875L12 2L16.125 8ZM6.61719 20H17.3828L19.5264 10H4.47363L6.61719 20ZM10.3018 8H13.6982L12 5.53027L10.3018 8Z" fill="currentColor"/>
+                </svg>
+                    
+                <a class="h-menu-link" href="#">CART</a>
                 
                     
             </div>

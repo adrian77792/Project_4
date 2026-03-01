@@ -14,7 +14,9 @@
 }
 
 .header-actions{
-    gap: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 .header-row {
@@ -32,8 +34,8 @@
 
 .header-row .left span {
     display: inline-flex;
-    align-items: center;   /* wyrównanie SVG do tekstu */
-    gap: 6px;              /* odstęp ikona–tekst */
+    align-items: center;  
+    gap: 6px;             
     font-size: 14px;
     color: var(--text_default_color);
 }
@@ -123,14 +125,13 @@ nav {
     background: var(--action_primary_default_color);
     border: 1px solid var(--action_primary_default_color);
     border-radius: 6px;
-    /*padding: 8px 12px;*/
     cursor: pointer;
     padding-top: 6px;
     padding-right: 8px;
     padding-bottom: 6px;
     padding-left: 8px;
     border-radius: 8px;
-    margin-right: 8px;
+    
 
 }
 .h-btn-primary img {
@@ -147,7 +148,6 @@ nav {
     background: var(--action_secondary_default_color);
     border: 1px solid var(--action_secondary_default_color);
     border-radius: 6px;
-    /*padding: 8px 12px;*/
     cursor: pointer;
     padding-top: 6px;
     padding-right: 8px;
@@ -175,8 +175,19 @@ nav {
     line-height: 100%;
     vertical-align: super;
     text-transform: uppercase;
+    text-decoration: none;
+    color: #2a1e0f
 
 }
 .h-menu-link:visited {
     color: inherit;
+}
+
+.n-menu-element:hover {
+    text-decoration: none !important;
+    color: #D3442A;
+}
+.n-menu-element {
+    color: #2a1e0f;
+
 }

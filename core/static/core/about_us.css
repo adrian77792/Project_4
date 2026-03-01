@@ -1,0 +1,36 @@
+.breadcrumb-section-bar {
+    background-color: var(--action_secondary_default_color);
+    height: 45px;
+    display: flex;
+    align-items: center; 
+}
+
+
+.breadcrumb-section-bar .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;  
+    gap: 8px;
+}
+
+
+.breadcrumb-section-arrow {
+    color: white;
+    font-size: 14px;
+    display: flex;
+    align-items: center; 
+}
+
+
+.breadcrumb-section-title {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1;        
+    text-transform: uppercase;
+    color: white;
+    display: flex;
+    align-items: center;   
+}

@@ -39,6 +39,16 @@
     margin: 10px 0 4px;
   }
   
+  .product-description {
+    font-family: Fredoka;
+    font-weight: 400;
+    font-style: Medium;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    }
+
   .product-desc {
     color: #666;
     flex-grow: 1;
@@ -49,8 +59,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
+    gap: 10px;
   }
+
 
   .price-group {
     display: flex;
@@ -118,11 +129,7 @@
     display: inline-flex;
   }
 
-  .product-price-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+ 
   
   .price-box {
     margin-left: auto; /* priorytet do prawej strony */

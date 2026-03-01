@@ -56,8 +56,9 @@ html, body {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-110%, -50%);
-  text-align: center;
+  transform: translate(-180%, -50%);
+  text-align: left;
+  justify-content: left;
 }
 
 
@@ -142,15 +143,6 @@ letter-spacing: 0%;
 vertical-align: middle;
 }
 
-.prodact-description {
-font-family: Fredoka;
-font-weight: 400;
-font-style: Medium;
-font-size: 14px;
-line-height: 100%;
-letter-spacing: 0%;
-vertical-align: middle;
-}
 
 .main-categories {
   font-family: "Fredoka", sans-serif;

@@ -43,8 +43,12 @@
   }
   
   .footer-social {
+    display: flex;
+    
     background-color: #c8442d;
-    text-align: center;
+    justify-content: center;
+    align-items: center;
     padding: 15px 0;
+    gap:20px;
   }
 

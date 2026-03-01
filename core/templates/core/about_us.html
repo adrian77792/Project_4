@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Tatko - Strona główna{% endblock %}
+
+{% block content %}
+
+
+{% include "core/header.html" %}
+
+<div class="breadcrumb-section-bar">
+    <div class="container">
+        {% for crumb in breadcrumbs %}
+            <span class="breadcrumb-section-arrow">&gt;</span>
+            {% if crumb.url %}
+                <a href="{{ crumb.url }}" class="breadcrumb-section-title">{{ crumb.name }}</a>
+            {% else %}
+                <span class="breadcrumb-section-title">{{ crumb.name }}</span>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+
+TEST
+
+
+{% include "core/footer.html" %}
+
+{% endblock %}
