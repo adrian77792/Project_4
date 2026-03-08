@@ -1,0 +1,120 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+
+{% include "core/header.html" %}
+
+
+<div class="breadcrumb-section-bar">
+    <div class="container">
+        {% for crumb in breadcrumbs %}
+            <span class="breadcrumb-section-arrow">&gt;</span>
+            {% if crumb.url %}
+                <a href="{{ crumb.url }}" class="breadcrumb-section-title">{{ crumb.name }}</a>
+            {% else %}
+                <span class="breadcrumb-section-title">{{ crumb.name }}</span>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container product-page">
+
+    <!-- LEWA STRONA (ZDJĘCIA) -->
+    <div class="product-gallery">
+
+        {% if product.main_image %}
+        <img src="{{ product.main_image.url }}" class="product-main-img">
+        {% endif %}
+
+        <div class="product-thumbs">
+            {% for img in product.images.all %}
+                <img src="{{ img.image.url }}" class="product-thumb">
+            {% endfor %}
+        </div>
+
+    </div>
+
+
+    <!-- PRAWA STRONA (INFO + KOSZYK) -->
+    <div class="product-info">
+
+        <h1 class="product-title about-head">{{ product.name }}</h1>
+
+        <div class="product-price price-group">
+            {{ product.price }} GB
+        </div>
+
+        <div class="product-buy">
+
+            <div class="qty-box">
+                <button class="">
+                    <img src="{% static 'products/images/substract.svg' %}" alt="Cart" style="width:24px; height:24px;" /> 
+                </button>
+                <input type="number" value="1" min="1">
+                <button class="btn-secondary">
+                    <img src="{% static 'products/images/add.svg' %}" alt="Cart" style="width:24px; height:24px;" /> 
+                </button>
+            </div>
+
+            
+            
+            <div class="product-actions">
+                <button class="btn-primary">
+                  <img src="{% static 'core/images/Cart.svg' %}" alt="Cart" style="width:24px; height:24px;" />      
+                  <span class="btn-fonts">ADD TO CART</span>
+                </button>
+                <button class="btn-secondary">
+                  <img src="{% static 'core/images/Heart.svg' %}" alt="Cart" style="width:24px; height:24px;" /> 
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- OPIS PRODUKTU -->
+<div class="product-description-section">
+
+<div class="container">
+
+    <h2 class="section-title">OPIS</h2>
+
+    <div class="product-desc-grid">
+
+        <div>
+
+            <h3 class="about-sub-head">Kolekcjonerska jakość</h3>
+
+            <p class="about-text">{{ product.description|linebreaks }}</p>
+
+        </div>
+
+
+        <div>
+
+            <h3 class="about-sub-head">Cechy produktu</h3>
+
+            <ul>
+                <li class="about-text">Producent: {{ product.brand.name }}</li>
+                <li class="about-text">Dostępność: {{ product.stock }}</li>
+                <li class="about-text">Kategoria: {{ product.category.name }}</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+{% include "core/footer.html" %}
+
+{% endblock %}

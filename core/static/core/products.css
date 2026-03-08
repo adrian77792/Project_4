@@ -117,7 +117,7 @@
   
   .btn-secondary {
     width: 40px;
-    background: var(--action_secondary_default_color);
+    background: var(--action_secondary_default_color) !important;
     color: #fff;
     border: none;
     padding: 8px 10px;
