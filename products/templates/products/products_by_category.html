@@ -1,0 +1,17 @@
+<h1>Products</h1>
+
+{% for category in categories %}
+<h2>{{ category.name }}</h2>
+
+<ul>
+    {% for product in category.products.all %}
+    <li>
+        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+        - {{ product.price }} £
+    </li>
+    {% empty %}
+    <li>No products</li>
+    {% endfor %}
+</ul>
+
+{% endfor %}

@@ -1,0 +1,91 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Your Cart{% endblock %}
+
+{% block content %}
+
+{% include "core/header.html" %}
+
+<div class="breadcrumb-section-bar">
+    <div class="container">
+        {% for crumb in breadcrumbs %}
+            <span class="breadcrumb-section-arrow">&gt;</span>
+            {% if crumb.url %}
+                <a href="{{ crumb.url }}" class="breadcrumb-section-title">{{ crumb.name }}</a>
+            {% else %}
+                <span class="breadcrumb-section-title">{{ crumb.name }}</span>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container product-page">
+
+    {% if cart_items %}
+        {% for item in cart_items %}
+        <div class="product-info" style="margin-bottom: 30px; border-bottom: 1px solid #ddd; padding-bottom: 20px;">
+            
+            <!-- LEWA STRONA (ZDJĘCIA) -->
+            <div class="product-gallery" style="flex: 0 0 150px;">
+                {% if item.product.main_image %}
+                    <img src="{{ item.product.main_image.url }}" class="product-main-img" style="width:150px;height:150px;object-fit:cover;">
+                {% else %}
+                    <img src="{% static 'products/no_image.png' %}" class="product-main-img" style="width:150px;height:150px;object-fit:cover;">
+                {% endif %}
+            </div>
+
+            <!-- PRAWA STRONA (INFO + KOSZYK) -->
+            <div class="product-info" style="flex: 1; margin-left:20px;">
+                <h1 class="product-title about-head" style="font-size: 1.2em;">
+                    <a href="{{ item.product.get_absolute_url }}" style="color:#C9452D; text-decoration:none;">
+                        {{ item.product.name }}
+                    </a>
+                </h1>
+
+                <div class="product-price price-group">
+                    {{ item.product.price }} GB
+                </div>
+
+                <div class="product-buy" style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                    <form action="{% url 'products:cart_remove' item.product.id %}" method="post" style="margin-right:10px;">
+                        {% csrf_token %}
+                        <button class="btn-secondary" type="submit">Remove</button>
+                    </form>
+
+                    <span>Qty: {{ item.quantity }}</span>
+
+                    <form action="{% url 'products:cart_add' item.product.id %}" method="post" style="margin-left:10px;">
+                        {% csrf_token %}
+                        <input type="hidden" name="quantity" value="1">
+                        <button class="btn-primary" type="submit">+</button>
+                    </form>
+                </div>
+
+                <div class="product-total" style="margin-top:10px; font-weight:bold;">
+                    Subtotal: GB
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="product-description-section">
+            <div class="container">
+                <h2 class="section-title">TOTAL: {{ total_price }} GB</h2>
+            </div>
+        </div>
+
+    {% else %}
+        <div class="product-description-section">
+            <div class="container">
+                <h2 class="section-title">Your cart is empty</h2>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+
+{% include "core/footer.html" %}
+
+{% endblock %}

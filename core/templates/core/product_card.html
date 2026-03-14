@@ -8,7 +8,9 @@
     {% else %}
       <p>No product image available</p>
     {% endif %}
-    <h4 class="product-name product-main">{{ product.name }}</h4>
+    <h4 class="product-name product-main">
+		<a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+	</h4>
     <p class="product-desc product-description">{{ product.short }}</p>
     <div class="product-price-row">
       {% if product.discount %}
@@ -24,13 +26,18 @@
       {% endif %}
     </div>
     <div class="product-actions">
-      <button class="btn-primary">
-        <img src="{% static 'core/images/Cart.svg' %}" alt="Cart" style="width:24px; height:24px;" />      
-        <span class="btn-fonts">ADD TO CART</span>
-      </button>
-      <button class="btn-secondary">
-        <img src="{% static 'core/images/Heart.svg' %}" alt="Cart" style="width:24px; height:24px;" /> 
-      </button>
-    </div>
+    <form action="{% url 'products:cart_add' product.id %}" method="post" class="add-to-cart-form">
+        {% csrf_token %}
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="btn-primary">
+            <img src="{% static 'core/images/Cart.svg' %}" alt="Cart" style="width:24px; height:24px;" />
+            <span class="btn-fonts">ADD TO CART</span>
+        </button>
+    </form>
+
+    <button class="btn-secondary">
+        <img src="{% static 'core/images/Heart.svg' %}" alt="Cart" style="width:24px; height:24px;" />
+    </button>
+</div>
   </div>
   

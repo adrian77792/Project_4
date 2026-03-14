@@ -32,6 +32,7 @@
   <div class="categories">
       {% for cat in categories %}
           <a 
+			href="{% url 'products:category_products' cat.slug %}"
             class="category-tile category-card"
             style="--cat-color: {{ cat.color|default:'#777' }};">
               {{ cat.name }}

@@ -38,6 +38,14 @@
     color: #C9452D;
     margin: 10px 0 4px;
   }
+  .product-name a,
+	.product-name a:link,
+	.product-name a:visited,
+	.product-name a:hover,
+	.product-name a:active {
+		color: #C9452D !important;  
+		text-decoration: none;      
+	}
   
   .product-description {
     font-family: Fredoka;
@@ -154,4 +162,24 @@
     color: #35322D;
     margin-right: 8px; /* odstęp między badge a ceną */
     flex-shrink: 0;    /* nie kurczy się przy małych ekranach */
+}
+
+.product-actions {
+    display: flex;
+    gap: 8px;       
+    align-items: center;
+}
+
+.add-to-cart-form {
+	flex: 1;
+    background: var(--action_primary_default_color);
+    color: #fff;
+    border: none;
+	cursor: pointer;
+	border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    display: inline-flex;
+	
 }

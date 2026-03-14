@@ -56,9 +56,13 @@ class Product(models.Model):
         ordering = ['-created_at']
         indexes = [models.Index(fields=['name']), models.Index(fields=['price'])]
  
-    def short(self, limit=100):
+    def short(self, limit=120):
         text = self.description
         return text if len(text) <= limit else text[:limit] + '...'
+        
+    def title(self, limit=26):
+        text = self.name
+        return text if len(text) <= limit else text[:limit] + '...'        
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -72,9 +76,17 @@ class Product(models.Model):
             self.slug = unique
         super().save(*args, **kwargs)
  
-    def get_absolute_url(self):
+    def get_absolute_url2(self):
         return reverse('products:detail', kwargs={'slug': self.slug})
- 
+        
+    def get_absolute_url(self):
+        return reverse(
+        'products:detail',
+        kwargs={
+            'category_slug': self.category.slug,
+            'slug': self.slug
+        }
+    )
     def __str__(self):
         return self.name
  

@@ -4,9 +4,11 @@
     
     <div class="container">
     <div class="header-row">
-        <div class="left">
-            <img src="{% static 'core/images/horizontal.png' %}" alt="Logo" />
-        </div>
+		<a href="{% url 'core:home' %}">
+			<div class="left">
+				<img src="{% static 'core/images/horizontal.png' %}" alt="Logo" />
+			</div>
+		</a>
 
         <div class="search-box">
             <span class="search-icon">
@@ -25,7 +27,7 @@
     
         <div class="nav-inner">
             <div class="nav-links">
-                <a class = "n-menu-element" href="#">
+                <a class = "n-menu-element" href="{% url 'core:home' %}">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2 10H4V22H20V10H22L12 2L2 10Z" fill="currentColor"/>
                     </svg>
@@ -59,7 +61,7 @@
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M16.125 8H22L19 22H5L2 8H7.875L12 2L16.125 8ZM6.61719 20H17.3828L19.5264 10H4.47363L6.61719 20ZM10.3018 8H13.6982L12 5.53027L10.3018 8Z" fill="currentColor"/>
                 </svg>
                     
-                <a class="h-menu-link" href="#">CART</a>
+                <a class="h-menu-link" href="{% url 'products:cart' %}">CART</a>
                 
                     
             </div>

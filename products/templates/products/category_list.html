@@ -1,0 +1,11 @@
+<h1>Kategorie</h1>
+
+<ul>
+{% for category in categories %}
+    <li>
+        <a href="{% url 'products:category_products' category.slug %}">
+            {{ category.name }}
+        </a>
+    </li>
+{% endfor %}
+</ul>
