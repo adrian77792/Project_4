@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from products.models import Product, Category
-
+from decimal import Decimal
 
 
 """def home(request):
@@ -32,10 +32,11 @@ def generate_breadcrumbs(request):
 
 def home(request):
     products = list(Product.objects.all())
-
-   
+    cart = request.session.get('cart', {})
+    cart_count = sum(cart.values())
+    
     latest_products = sorted(products, key=lambda p: p.id, reverse=True)[:4]
-
+    
  
     discounted_products = []
     for p in products:
@@ -52,14 +53,18 @@ def home(request):
     categories = list(Category.objects.all()[:6])
 
     return render(request, "core/index.html", {
+        "cart_count": cart_count,
         "latest_products": latest_products,
         "discounted_products": discounted_products,
         "categories": categories,
     })
 
 def about_us(request):
+    cart = request.session.get('cart', {})
+    cart_count = sum(cart.values())
     breadcrumbs = generate_breadcrumbs(request)
     return render(request, "core/about_us.html", {
         "breadcrumbs": breadcrumbs,
+        "cart_count": cart_count,
         "title": breadcrumbs[-1]['name'] if breadcrumbs else 'Home'
     })

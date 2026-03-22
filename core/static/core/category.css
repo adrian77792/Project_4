@@ -28,3 +28,15 @@
     box-shadow: 0 6px 14px rgba(0,0,0,0.2);
 }
 
+.category-unfoccus {
+    padding: 26px 26px;
+    border-radius: 8px;
+   
+    color: var(--cat-color);
+	border: 2px solid var(--cat-color);
+    text-decoration: none;
+    font-weight: 600;
+    min-width: 139px;
+    text-align: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}

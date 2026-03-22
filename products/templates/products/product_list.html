@@ -1,5 +1,12 @@
+{% extends "core/base.html" %}
 {% load static %}
-<!DOCTYPE html>
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+
+{% include "core/header.html" %}
+
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{% static 'products/style.css' %}">
@@ -27,3 +34,8 @@
   </ul>
 </body>
 </html>
+
+
+{% include "core/footer.html" %}
+
+{% endblock %}

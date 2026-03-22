@@ -1,10 +1,57 @@
-<h1>{{ category.name }}</h1>
+{% extends "core/base.html" %}
+{% load static %}
 
-<ul>
-{% for product in products %}
-<li>
-<a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-- {{ product.price }} £
-</li>
-{% endfor %}
-</ul>
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+
+{% include "core/header.html" %}
+
+<div style="background-color: var(--background_default_color); color: var(--text_default_color); padding-bottom: 10px;">
+  <div class="container">
+  <h2 class="section-title main-categories" style="color: var(--action_primary_default_color);">TOY CATEGORIES</h2>
+  </div>
+  <div class="container">
+  <div class="categories">
+      {% for cat in categories %}
+		{% if cat.name == category.name %}
+			<a 
+				href="{% url 'products:category_products' cat.slug %}"
+				class="category-tile category-card"
+				style="--cat-color: {{ cat.color|default:'#777' }};">
+				{{ cat.name }}
+			</a>
+		{% else %}
+			<a 
+				href="{% url 'products:category_products' cat.slug %}"
+				class="category-unfoccus category-card"
+				style="--cat-color: {{ cat.color|default:'#777' }};">
+				{{ cat.name }}
+			</a>
+		{% endif %}
+	{% endfor %}
+  </div>
+  </div>
+</div>
+
+
+<div class="bg-white">
+  <div class="container">
+	<h2 style="color: var(--action_primary_default_color);" class="main-categories">
+		RESULS FOUND ({{ products.count }})
+	</h2>
+  </div>
+  <div class="container">
+  <div class="products">
+    {% for p in products %}
+      {% include "core/product_card.html" with product=p %}
+    {% endfor %}
+  </div>
+  </div>
+</div>
+
+
+
+{% include "core/footer.html" %}
+
+{% endblock %}

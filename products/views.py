@@ -9,6 +9,8 @@ def product_list(request):
                   {"products":products})
 
 def product_detail(request, category_slug, slug):
+    cart = request.session.get('cart', {})
+    cart_count = sum(cart.values())
     product = get_object_or_404(
         Product,
         slug=slug,
@@ -22,6 +24,7 @@ def product_detail(request, category_slug, slug):
         "products/product_page.html",
         {
             "product": product,
+            "cart_count": cart_count,
             "breadcrumbs": breadcrumbs
         }
     )
@@ -45,14 +48,20 @@ def generate_breadcrumbs(request):
 
 def category_list(request):
     categories = Category.objects.all()
+    cart = request.session.get('cart', {})
+    cart_count = sum(cart.values())    
     return render(request, "products/category_list.html", {
-        "categories": categories
+        "categories": categories,
+        "cart_count": cart_count
     })    
     
     
 def category_products(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
+    cart = request.session.get('cart', {})
+    cart_count = sum(cart.values())    
     products = category.products.all()
+    categories = list(Category.objects.all()[:6])
 
     breadcrumbs = generate_breadcrumbs(request)
 
@@ -61,12 +70,16 @@ def category_products(request, category_slug):
         "products/category_products.html",
         {
             "category": category,
+            "cart_count": cart_count,
             "products": products,
-            "breadcrumbs": breadcrumbs
+            "breadcrumbs": breadcrumbs,
+            "categories": categories
         }
     )    
     
 def products_by_category(request):
+    cart = request.session.get('cart', {})
+    cart_count = sum(cart.values())
     categories = Category.objects.prefetch_related("products")
 
     return render(request, "products/products_by_category.html", {
@@ -96,20 +109,27 @@ def remove_from_cart(request, product_id):
 def view_cart(request):
     cart = request.session.get('cart', {})  # sesyjny koszyk
     cart_items = []
-
+    cart_count = sum(cart.values())    
+    
     total_price = Decimal(0)
     for product_id, quantity in cart.items():
         product = get_object_or_404(Product, id=product_id)
         cart_items.append({
             'product': product,
-            'quantity': quantity
+            'quantity': quantity,
+            'subtotal': product.price * quantity
         })
         total_price += product.price * quantity
 
     breadcrumbs = [{'name': 'Home', 'url': '/'}, {'name': 'Cart', 'url': ''}]
+    
+    products = list(Product.objects.all())
+    latest_products = sorted(products, key=lambda p: p.id, reverse=True)[:4]
 
     return render(request, 'products/cart.html', {
+        "latest_products": latest_products,
         'cart_items': cart_items,
+        "cart_count": cart_count,
         'total_price': total_price,
         'breadcrumbs': breadcrumbs
     })
