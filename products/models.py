@@ -10,8 +10,10 @@ class Category(models.Model):
     slug = models.SlugField(max_length=140, unique=True, blank=True)
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children', on_delete=models.SET_NULL)
     color = ColorField(default='#777777')
- 
+    order = models.PositiveIntegerField(default=0)
+
     class Meta:
+        ordering = ['order']
         verbose_name_plural = "kategorie"
  
     def save(self, *args, **kwargs):
@@ -25,6 +27,11 @@ class Category(models.Model):
 class Brand(models.Model):
     name = models.CharField(max_length=120, unique=True)
     website = models.URLField(blank=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
     def __str__(self):
         return self.name
  
@@ -35,25 +42,17 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     category = models.ForeignKey(Category, related_name="products", on_delete=models.PROTECT)
     brand = models.ForeignKey(Brand, related_name="products", on_delete=models.SET_NULL, null=True, blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.00'))])
-    discount = models.PositiveSmallIntegerField(
-        null=True,
-        blank=True,
-        default=0,
-        validators=[
-            MinValueValidator(0),
-            MaxValueValidator(99),
-        ],
-        help_text="Discount (0–99)"
-    )
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    discount = models.PositiveSmallIntegerField(default=0)
     available = models.DecimalField(decimal_places=0, max_digits=10)
+    order = models.PositiveIntegerField(default=0)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    # opcjonalnie: główny obraz
     main_image = models.ImageField(upload_to='products/main/', null=True, blank=True)
- 
+
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['order', '-created_at']
         indexes = [models.Index(fields=['name']), models.Index(fields=['price'])]
  
     def short(self, limit=120):

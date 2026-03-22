@@ -107,29 +107,46 @@ def remove_from_cart(request, product_id):
     return redirect('products:cart')
 
 def view_cart(request):
-    cart = request.session.get('cart', {})  # sesyjny koszyk
+    cart = request.session.get('cart', {})
     cart_items = []
-    cart_count = sum(cart.values())    
-    
-    total_price = Decimal(0)
+    cart_count = sum(cart.values())
+    total_price = Decimal('0.00')
+
+    invalid_keys = []
+
     for product_id, quantity in cart.items():
-        product = get_object_or_404(Product, id=product_id)
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            invalid_keys.append(product_id)
+            continue
+
+        subtotal = product.price * quantity
         cart_items.append({
             'product': product,
             'quantity': quantity,
-            'subtotal': product.price * quantity
+            'subtotal': subtotal
         })
-        total_price += product.price * quantity
+        total_price += subtotal
 
-    breadcrumbs = [{'name': 'Home', 'url': '/'}, {'name': 'Cart', 'url': ''}]
-    
-    products = list(Product.objects.all())
-    latest_products = sorted(products, key=lambda p: p.id, reverse=True)[:4]
+    for key in invalid_keys:
+        del cart[key]
+
+    if invalid_keys:
+        request.session['cart'] = cart
+        request.session.modified = True
+
+    breadcrumbs = [
+        {'name': 'Home', 'url': '/'},
+        {'name': 'Cart', 'url': ''}
+    ]
+
+    latest_products = Product.objects.order_by('-id')[:4]
 
     return render(request, 'products/cart.html', {
-        "latest_products": latest_products,
+        'latest_products': latest_products,
         'cart_items': cart_items,
-        "cart_count": cart_count,
+        'cart_count': sum(cart.values()),
         'total_price': total_price,
         'breadcrumbs': breadcrumbs
     })
