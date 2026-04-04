@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.paginator import Paginator
+from .models import Product
 from .models import Product
 from .models import Category
 from decimal import Decimal
@@ -7,6 +9,7 @@ def product_list(request):
     products = Product.objects.all()
     return render(request, "products/product_list.html",
                   {"products":products})
+                  
 
 def product_detail(request, category_slug, slug):
     cart = request.session.get('cart', {})
@@ -61,6 +64,9 @@ def category_products(request, category_slug):
     cart = request.session.get('cart', {})
     cart_count = sum(cart.values())    
     products = category.products.all()
+    paginator = Paginator(products, 12)  # 12 produktów na stronę
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     categories = list(Category.objects.all()[:6])
 
     breadcrumbs = generate_breadcrumbs(request)
@@ -73,7 +79,8 @@ def category_products(request, category_slug):
             "cart_count": cart_count,
             "products": products,
             "breadcrumbs": breadcrumbs,
-            "categories": categories
+            "categories": categories,
+            'page_obj': page_obj
         }
     )    
     

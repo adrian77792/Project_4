@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from products.models import Product, Category
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 
 
 def generate_breadcrumbs(request):
@@ -35,7 +35,10 @@ def home(request):
     for p in products:
         if p.discount:
             try:
-                p.discounted_price = p.price - (p.price * p.discount / Decimal('100'))
+                p.discounted_price = (p.price - (p.price * p.discount / Decimal('100'))).quantize(
+                    Decimal('0.01'),
+                    rounding=ROUND_HALF_UP
+                )
                 discounted_products.append(p)
             except TypeError:
                 pass

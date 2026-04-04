@@ -55,6 +55,8 @@ class Product(models.Model):
     class Meta:
         ordering = ['order', '-created_at']
         indexes = [models.Index(fields=['name']), models.Index(fields=['price'])]
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
  
     def short(self, limit=120):
         text = self.description
@@ -102,18 +104,3 @@ class ProductImage(models.Model):
     def __str__(self):
         return f"Image for {self.product.name}"
  
-class ProductVariant(models.Model):
-    """
-    Wariant produktu (np. kolor/rozmiar). Jeśli nie potrzebujesz wariantów, możesz pominąć.
-    """
-    product = models.ForeignKey(Product, related_name='variants', on_delete=models.CASCADE)
-    name = models.CharField(max_length=120)  # np. "Czerwony", "Rozmiar 3-5"
-    sku = models.CharField(max_length=50, unique=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.00'))])
-    stock = models.PositiveIntegerField(default=0)
- 
-    class Meta:
-        unique_together = ('product', 'name')
- 
-    def __str__(self):
-        return f"{self.product.name} — {self.name}"

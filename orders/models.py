@@ -45,7 +45,6 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
     product = models.ForeignKey('products.Product', on_delete=models.PROTECT)
-    variant = models.ForeignKey('products.ProductVariant', null=True, blank=True, on_delete=models.PROTECT)
     quantity = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1)])
     unit_price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.00'))])
  

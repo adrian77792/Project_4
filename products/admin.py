@@ -4,7 +4,7 @@ from import_export.widgets import ForeignKeyWidget
 from import_export.admin import ImportExportModelAdmin
 from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
 
-from .models import Product, Category, Brand, ProductImage, ProductVariant
+from .models import Product, Category, Brand, ProductImage
 
 
 class CleanForeignKeyWidget(ForeignKeyWidget):
@@ -37,9 +37,6 @@ class ProductImageInline(SortableInlineAdminMixin, admin.TabularInline):
     extra = 1
 
 
-class ProductVariantInline(admin.TabularInline):
-    model = ProductVariant
-    extra = 0
 
 
 @admin.register(Product)
@@ -49,7 +46,7 @@ class ProductAdmin(SortableAdminMixin, ImportExportModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ('name', 'sku')
     list_filter = ('available', 'category', 'brand')
-    inlines = [ProductImageInline, ProductVariantInline]
+    inlines = [ProductImageInline]
 
 
 @admin.register(Category)
