@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 from colorfield.fields import ColorField
 
 class Category(models.Model):
@@ -51,7 +51,19 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     main_image = models.ImageField(upload_to='products/main/', null=True, blank=True)
-
+    
+    @property
+    def discounted_price(self):
+        if self.discount:
+            try:
+                return (self.price - (self.price * self.discount / Decimal('100'))).quantize(
+                    Decimal('0.01'),
+                    rounding=ROUND_HALF_UP
+                )
+            except TypeError:
+                return self.price
+        return self.price
+    
     class Meta:
         ordering = ['order', '-created_at']
         indexes = [models.Index(fields=['name']), models.Index(fields=['price'])]

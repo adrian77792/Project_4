@@ -28,22 +28,12 @@ def home(request):
     cart = request.session.get('cart', {})
     cart_count = sum(cart.values())
 
-    products = Product.objects.order_by('order', '-created_at')
-    latest_products = Product.objects.order_by('-created_at')[:4]
+    products = Product.objects.all()
 
-    discounted_products = []
-    for p in products:
-        if p.discount:
-            try:
-                p.discounted_price = (p.price - (p.price * p.discount / Decimal('100'))).quantize(
-                    Decimal('0.01'),
-                    rounding=ROUND_HALF_UP
-                )
-                discounted_products.append(p)
-            except TypeError:
-                pass
+    # tylko filtrowanie – bez liczenia
+    discounted_products = [p for p in products if p.discount][:4]
 
-    discounted_products = discounted_products[:4]
+    latest_products = products.order_by('-created_at')[:4]
 
     categories = Category.objects.order_by('order')[:6]
 

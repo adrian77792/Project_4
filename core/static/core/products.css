@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
-    /*justify-content: center;*/
+    
   }
   
   .product-card {
@@ -74,7 +74,7 @@
   .price-group {
     display: flex;
     align-items: center;
-    gap: 6px; /* odstęp między starą a nową ceną */
+    gap: 6px; 
 }
   
   .old-price {
@@ -140,7 +140,7 @@
  
   
   .price-box {
-    margin-left: auto; /* priorytet do prawej strony */
+    margin-left: auto; 
     display: flex;
     align-items: center;
     gap: 8px;
@@ -160,8 +160,8 @@
     text-align: center;
     text-transform: uppercase;
     color: #35322D;
-    margin-right: 8px; /* odstęp między badge a ceną */
-    flex-shrink: 0;    /* nie kurczy się przy małych ekranach */
+    margin-right: 8px; 
+    flex-shrink: 0;    
 }
 
 .product-actions {

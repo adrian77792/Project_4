@@ -1,0 +1,31 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: sans-serif;
+    font-size: 14px;
+	font-weight: bold;
+}
+
+.pagination .page,
+.pagination .nav {
+    text-decoration: none;
+    color: #666;
+    padding: 2px 6px;
+}
+
+.pagination .page:hover,
+.pagination .nav:hover {
+    color: #000;
+}
+
+.pagination .active {
+    font-weight: bold;
+	color: var(--action_primary_default_color);
+}
+
+.pagination .disabled {
+    color: #bbb;
+    pointer-events: none;
+}

@@ -191,3 +191,8 @@ nav {
     color: #2a1e0f;
 
 }
+
+.activated {
+
+	color: var(--action_primary_default_color) !important;
+}

@@ -26,22 +26,33 @@
     <nav>
     
         <div class="nav-inner">
-            <div class="nav-links">
-                <a class = "n-menu-element" href="{% url 'core:home' %}">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2 10H4V22H20V10H22L12 2L2 10Z" fill="currentColor"/>
-                    </svg>
-                        
-                        
-                </a>
+            
+			
+			<div class="nav-links">
 
-                <a class="n-menu-element h-menu-link" href="#">TOYS</a>
-                <a class="n-menu-element h-menu-link" href="#">CLOTHES</a>
-                <a class="n-menu-element h-menu-link" href="#">NEWS</a>
-                <a class="n-menu-element h-menu-link" href="#">SPECIAL OFFER</a>
-                <a class="n-menu-element h-menu-link" href="/about_us">ABOUT US</a>
+				<a class="n-menu-element {% if request.path == '/' %}activated{% endif %}"
+				   href="{% url 'core:home' %}">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+						<path d="M2 10H4V22H20V10H22L12 2L2 10Z" fill="currentColor"/>
+					</svg>
+				</a>
 
-            </div>
+				<a class="n-menu-element h-menu-link {% if request.path == '/news' %}activated{% endif %}"
+				   href="/news">
+					NEWS
+				</a>
+
+				<a class="n-menu-element h-menu-link {% if request.path == '/special-offer' %}activated{% endif %}"
+				   href="/special-offer">
+					SPECIAL OFFER
+				</a>
+
+				<a class="n-menu-element h-menu-link {% if request.path == '/about_us' %}activated{% endif %}"
+				   href="/about_us">
+					ABOUT US
+				</a>
+
+			</div>
 
             <div class="header-actions">
                 <button class="h-btn-primary">
