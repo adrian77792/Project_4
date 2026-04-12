@@ -1,0 +1,127 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block title %}Tatko - Strona główna{% endblock %}
+
+{% block content %}
+
+
+{% include "core/header.html" %}
+
+<div class="breadcrumb-section-bar">
+    <div class="container">
+        {% for crumb in breadcrumbs %}
+            <span class="breadcrumb-section-arrow">&gt;</span>
+            {% if crumb.url %}
+                <a href="{{ crumb.url }}" class="breadcrumb-section-title">{{ crumb.name }}</a>
+            {% else %}
+                <span class="breadcrumb-section-title">{{ crumb.name }}</span>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+  <section class="c-hero">
+    <div class="container c-hero-grid">
+      <div>
+        <div class="tag">Tatko Contact</div>
+        <h1>Skontaktuj się z nami</h1>
+        <p class="lead">
+          Masz pytanie o zamówienie, dostawę, produkty albo współpracę? Napisz do nas, a odpowiemy tak szybko, jak to możliwe.
+        </p>
+
+        <div class="contact-cards">
+          <div class="card">
+            <div class="card-title">Telefon</div>
+            <p>+48 123 456 789</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Email</div>
+            <p>kontakt@tatko.pl</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Godziny</div>
+            <p>Pn–Pt 8:00–17:00</p>
+          </div>
+        </div>
+      </div>
+	
+      <div class="form-box">
+        <h2>Formularz kontaktowy</h2>
+        <form>
+          <div class="row">
+            <div class="field">
+              <label>Imię</label>
+              <input type="text" placeholder="Twoje imię">
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input type="email" placeholder="twoj@email.com">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Temat</label>
+            <input type="text" placeholder="W czym możemy pomóc?">
+          </div>
+
+          <div class="field">
+            <label>Wiadomość</label>
+            <textarea rows="6" placeholder="Napisz wiadomość..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Wyślij wiadomość</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <div class="container info-grid">
+      <div class="info-box">
+        <h3 class="c-section-title">Dane firmy</h3>
+        <p>Tatko Świat Dziecka</p>
+        <p>ul. Przykładowa 12</p>
+        <p>00-000 Warszawa</p>
+        <p>NIP: 000-000-00-00</p>
+      </div>
+
+      <div class="info-box">
+        <h3 class="c-section-title">Obsługa klienta</h3>
+        <p>Zwroty i reklamacje</p>
+        <p>Status zamówienia</p>
+        <p>Pytania o produkty</p>
+        <p>Współpraca B2B</p>
+      </div>
+
+      <div class="info-box">
+        <h3 class="c-section-title">Social media</h3>
+        <p>Facebook / Tatko</p>
+        <p>Instagram / @tatko</p>
+        <p>TikTok / @tatko.shop</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="map-section">
+    <div class="container">
+      <div class="map-box">
+        <div class="map-header">
+          <h3 class="section-title" style="margin-bottom: 0;">Mapa / lokalizacja</h3>
+        </div>
+        <div class="map-placeholder">
+          <iframe 
+		  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2914.315258883643!2d17.829660712623706!3d51.64375107172726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ab5cdd5f3ff79%3A0xd896471428baa138!2sTatko!5e1!3m2!1spl!2suk!4v1775974754955!5m2!1spl!2suk" 
+		  width="800" height="350" 
+		  style="border:0;" allowfullscreen="" loading="lazy" 
+		  referrerpolicy="no-referrer-when-downgrade">
+		  </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% include "core/footer.html" %}
+
+{% endblock %}

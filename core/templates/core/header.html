@@ -36,6 +36,11 @@
 						<path d="M2 10H4V22H20V10H22L12 2L2 10Z" fill="currentColor"/>
 					</svg>
 				</a>
+				
+				<a class="n-menu-element h-menu-link {% if request.path == '/contact' %}activated{% endif %}"
+				   href="/contact">
+					CONTACT
+				</a>
 
 				<a class="n-menu-element h-menu-link {% if request.path == '/news' %}activated{% endif %}"
 				   href="/news">

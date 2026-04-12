@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from products.models import Product, Category
+from core.models import News
 from decimal import Decimal, ROUND_HALF_UP
 
 
@@ -55,3 +56,21 @@ def about_us(request):
         "cart_count": cart_count,
         "title": breadcrumbs[-1]['name'] if breadcrumbs else 'Home'
     })
+    
+def contact(request):
+    cart = request.session.get('cart', {})
+    cart_count = sum(cart.values())
+    breadcrumbs = generate_breadcrumbs(request)
+
+    return render(request, "core/contact.html", {
+        "breadcrumbs": breadcrumbs,
+        "cart_count": cart_count,
+        "title": breadcrumbs[-1]['name'] if breadcrumbs else 'Home'
+    })    
+    
+def news_list(request):
+    news_list = News.objects.all().order_by('-created_at')
+
+    return render(request, 'core/news.html', {
+        'news_list': news_list
+    })    
