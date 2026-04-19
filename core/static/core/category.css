@@ -18,7 +18,7 @@
     color: #fff;
     text-decoration: none;
     font-weight: 600;
-    min-width: 139px;
+    min-width: 11%;
     text-align: center;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -36,7 +36,7 @@
 	border: 2px solid var(--cat-color);
     text-decoration: none;
     font-weight: 600;
-    min-width: 139px;
+    min-width: 11%;
     text-align: center;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }

@@ -7,6 +7,25 @@
 
 
 {% include "core/header.html" %}
+
+<div style="background-color: var(--background_default_color); color: var(--text_default_color);">
+  <div class="container">
+    {#<h2 class="section-title main-categories" style="color: var(--action_primary_default_color);">TOY CATEGORIES</h2>#}
+  </div>
+  <div class="container">
+  <div class="categories">
+      {% for cat in categories %}
+          <a 
+			href="{% url 'products:category_products' cat.slug %}"
+            class="category-tile category-card"
+            style="--cat-color: {{ cat.color|default:'#777' }};">
+              {{ cat.name }}
+          </a>
+      {% endfor %}
+  </div>
+  </div>
+</div>
+
 <div class="hero">
 <div class="hero-container">
 
@@ -22,24 +41,6 @@
     </div>
 
 </div>
-</div>
-
-<div style="background-color: var(--background_default_color); color: var(--text_default_color); padding-bottom: 10px;">
-  <div class="container">
-  <h2 class="section-title main-categories" style="color: var(--action_primary_default_color);">TOY CATEGORIES</h2>
-  </div>
-  <div class="container">
-  <div class="categories">
-      {% for cat in categories %}
-          <a 
-			href="{% url 'products:category_products' cat.slug %}"
-            class="category-tile category-card"
-            style="--cat-color: {{ cat.color|default:'#777' }};">
-              {{ cat.name }}
-          </a>
-      {% endfor %}
-  </div>
-  </div>
 </div>
 
 <div class="bg-white">
