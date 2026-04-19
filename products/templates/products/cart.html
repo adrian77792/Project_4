@@ -20,71 +20,179 @@
     </div>
 </div>
 
+<style>
+.cart-container {
+    max-width: 900px;
+    margin: auto;
+   padding: 2px;
+	
+}
+
+.cart-title {
+    font-family: Montserrat;
+	font-weight: 600;
+	font-size: 36px;
+	leading-trim: NONE;
+	line-height: 100%;
+	letter-spacing: 0%;
+	vertical-align: middle;
+	text-transform: uppercase;
+	color: var(--action_primary_default_color);
+	padding-bottom: 20px;
+	padding-top:20px;
+
+}
+
+.cart-info {
+    display: flex;
+    align-items: center;   /* pion */
+    gap: 8px;              /* odstęp między ikoną a tekstem */
+
+    font-family: Fredoka;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: uppercase;
+	padding-bottom: 15px;
+}
+
+.cart-info b {
+	font-weight:500
+}
+
+
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 300px 1fr 120px 160px;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+}
+
+.cart-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cart-name {
+    font-weight: bold;
+    color: #c94c2d;
+}
+
+.cart-meta {
+    font-size: 12px;
+    color: #666;
+}
+
+
+
+
+.cart-price {
+    font-weight: bold;
+	height: 100%;
+}
+
+.cart-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+
+.cart-details {
+	height: 100%;
+}
+
+</style>
+<div class="bg-cream">
+	<div class="container  ">
+		
+			<div class="cart-title">TWÓJ KOSZYK
+			</div>
+
+			<div class="cart-info">
+				TOTAL: <b>{{ cart_items|length }} PRODUCTS </b>
+			</div>
+			<div class="cart-info">
+				<img src="{% static 'products/images/InfoIcon.svg' %}" alt="Info" style="width:24=px; height:24px;" />
+				<span>Dodanie produktu do koszyka nie oznacza jego rezerwacji. Nie zwlekaj z zakupem. </span>
+			</div>
+			<div class="cart-info">
+				<img src="{% static 'products/images/CalendarIcon.svg' %}" alt="Info" style="width:24px; height:24px;" />
+				<span>
+				Przewidywana data dostawy zamówienia:
+				<b>{{ delivery_from|date:"j" }}-{{ delivery_to|date:"j F" }}</b>
+				</span>
+			</div>
+			
+		
+	
+	</div>
+</div>
+
+
 <div class="bg-white">
 	<div class="container  ">
 
-		{% if cart_items %}
+		<div class="cart-container">
+
 			{% for item in cart_items %}
-			<div class="product-info product-page" style="margin-bottom: 30px; border-bottom: 1px solid #ddd; padding-bottom: 20px;">
-				
-				<!-- LEWA STRONA (ZDJĘCIA) -->
-				<div class="product-gallery" style="flex: 0 0 150px;">
-					{% if item.product.main_image %}
-						<img src="{{ item.product.main_image.url }}" class="product-main-img" style="width:150px;height:150px;object-fit:cover;">
-					{% else %}
-						<img src="{% static 'products/no_image.png' %}" class="product-main-img" style="width:150px;height:150px;object-fit:cover;">
-					{% endif %}
+			<div class="cart-item">
+
+				<!-- IMAGE -->
+				<div class="cart-img">
+					<img src="{{ item.product.main_image.url }}">
 				</div>
 
-				<!-- PRAWA STRONA (INFO + KOSZYK) -->
-				<div class="product-info" style="flex: 1; margin-left:20px;">
-					<h1 class="product-title about-head" style="font-size: 1.2em;">
-						<a href="{{ item.product.get_absolute_url }}" style="color:#C9452D; text-decoration:none;">
-							{{ item.product.name }}
-						</a>
-					</h1>
+				<!-- INFO -->
+				<div class="cart-details">
+					<div class="cart-name">{{ item.product.name }}</div>
 
-					<div class="product-price price-group">
-						{{ item.product.price }} GB
+					<div class="cart-meta">
+						{{ item.product.description }}
 					</div>
 
-					<div class="product-buy" style="display:flex; align-items:center; gap:10px; margin-top:10px;">
-						<form action="{% url 'products:cart_remove' item.product.id %}" method="post" style="margin-right:10px;">
-							{% csrf_token %}
-							<button class="btn-secondary" type="submit">Remove</button>
-						</form>
-
-						<span>Qty: {{ item.quantity }}</span>
-
-						<form action="{% url 'products:cart_add' item.product.id %}" method="post" style="margin-left:10px;">
-							{% csrf_token %}
-							<input type="hidden" name="quantity" value="1">
-							<button class="btn-primary" type="submit">+</button>
-						</form>
+					<div class="qty-box">
+						<button class="btn-addytion" style="width=30px">
+							<img src="{% static 'products/images/substract.svg' %}" alt="Cart" style="width:24px; height:24px;" /> 
+						</button>
+						<input class= "input-number" type="number" value="1" min="1">
+						<button class="btn-secondary">
+							<img src="{% static 'products/images/add.svg' %}" alt="Cart" style="width:24px; height:24px;" /> 
+						</button>
 					</div>
-
-					<div class="product-total" style="margin-top:10px; font-weight:bold;">
-						Subtotal: GB
-					</div>
-
 				</div>
+
+				<!-- PRICE -->
+				<div class="cart-price">
+					{{ item.product.price }} zł
+				</div>
+
+				<!-- ACTIONS -->
+				<div class="cart-actions">
+					<button class="btn-save">Do schowka</button>
+
+					<form method="post" action="{% url 'products:cart_remove' item.product.id %}">
+						{% csrf_token %}
+						<button class="btn-remove">Usuń z koszyka</button>
+					</form>
+				</div>
+
 			</div>
-			
 			{% endfor %}
 
-			<div class="product-description-section">
-				<div class="container">
-					<h2 class="section-title">TOTAL: {{ total_price }} GB</h2>
-				</div>
-			</div>
+			<!-- SUMMARY -->
+			<div class="cart-summary">
+				<div>Łączna wartość: {{ total_price }} zł</div>
+				<div class="total">Do zapłaty: {{ total_price }} zł</div>
 
-		{% else %}
-			<div class="product-description-section">
-				<div class="container">
-					<h2 class="section-title">Your cart is empty</h2>
-				</div>
+				<button class="checkout-btn">Przejdź do płatności</button>
 			</div>
-		{% endif %}
+		</div>
 
 	</div>
 

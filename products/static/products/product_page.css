@@ -52,10 +52,10 @@ align-items:left;
 display:flex;
 border-radius:6px;
 overflow:hidden;
+gap: 10px;
 }
 
 .qty-box button{
-width:35px;
 border:none;
 background:#e6cba0;
 cursor:pointer;
@@ -64,8 +64,6 @@ cursor:pointer;
 .qty-box input{
 width:40px;
 text-align:center;
-border:none;
-background:#eee;
 }
 
 .btn-add-cart{

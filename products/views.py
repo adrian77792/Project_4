@@ -4,6 +4,7 @@ from .models import Product
 from .models import Product
 from .models import Category
 from decimal import Decimal
+from datetime import date, timedelta
 
 def product_list(request):
     products = Product.objects.all()
@@ -114,6 +115,9 @@ def remove_from_cart(request, product_id):
     return redirect('products:cart')
 
 def view_cart(request):
+    today = date.today()
+    delivery_from = today + timedelta(days=3)
+    delivery_to = today + timedelta(days=7)
     cart = request.session.get('cart', {})
     cart_items = []
     cart_count = sum(cart.values())
@@ -155,5 +159,7 @@ def view_cart(request):
         'cart_items': cart_items,
         'cart_count': sum(cart.values()),
         'total_price': total_price,
-        'breadcrumbs': breadcrumbs
+        'breadcrumbs': breadcrumbs,
+        "delivery_from": delivery_from,
+        "delivery_to": delivery_to
     })

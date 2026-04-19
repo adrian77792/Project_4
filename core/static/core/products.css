@@ -124,7 +124,6 @@
   
   
   .btn-secondary {
-    width: 40px;
     background: var(--action_secondary_default_color) !important;
     color: #fff;
     border: none;
@@ -137,6 +136,32 @@
     display: inline-flex;
   }
 
+  .btn-addytion {
+    width: 40px;
+    background: #e6cba0 !important;
+    color: #fff;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    display: inline-flex;
+  }
+  
+   .input-number {
+	width: 40px;
+	border: 1px solid #e6cba0; /* ustawiasz border + kolor naraz */
+	padding: 8px 10px;
+	border-radius: 8px;
+	cursor: pointer;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
  
   
   .price-box {
