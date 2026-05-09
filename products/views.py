@@ -3,8 +3,10 @@ from django.core.paginator import Paginator
 from .models import Product
 from .models import Product
 from .models import Category
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 from datetime import date, timedelta
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 def product_list(request):
     products = Product.objects.all()
@@ -104,6 +106,25 @@ def add_to_cart(request, product_id):
     request.session.modified = True
     
     return redirect(request.META.get('HTTP_REFERER', '/'))
+    
+    
+def subtract_from_cart(request, product_id):
+
+    get_object_or_404(Product, id=product_id)
+
+    cart = request.session.get('cart', {})
+    pid = str(product_id)
+
+    if pid in cart:
+        cart[pid] -= 1
+
+        if cart[pid] <= 0:
+            del cart[pid]
+
+    request.session['cart'] = cart
+    request.session.modified = True
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))    
 
 
 def remove_from_cart(request, product_id):
@@ -132,10 +153,15 @@ def view_cart(request):
             invalid_keys.append(product_id)
             continue
 
-        subtotal = product.price * quantity
+        discount_multiplier = Decimal('1.0') - (Decimal(product.discount or 0) / Decimal('100'))
+        effective_price = product.price * discount_multiplier
+        effective_price = effective_price.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+
+        subtotal = (effective_price * quantity).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
         cart_items.append({
             'product': product,
             'quantity': quantity,
+            'unit_price': effective_price,
             'subtotal': subtotal
         })
         total_price += subtotal
@@ -163,3 +189,27 @@ def view_cart(request):
         "delivery_from": delivery_from,
         "delivery_to": delivery_to
     })
+    
+
+
+@require_POST
+def update_cart(request, product_id):
+
+    cart = request.session.get('cart', {})
+
+    try:
+        quantity = int(request.POST.get('quantity', 1))
+    except (TypeError, ValueError):
+        quantity = 1
+
+    product_id = str(product_id)
+
+    if quantity <= 0:
+        cart.pop(product_id, None)
+    else:
+        cart[product_id] = quantity
+
+    request.session['cart'] = cart
+    request.session.modified = True
+
+    return redirect('products:cart')

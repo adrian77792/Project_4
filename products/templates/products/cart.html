@@ -64,7 +64,7 @@
 
 .cart-item {
     display: grid;
-    grid-template-columns: 300px 1fr 120px 160px;
+    grid-template-columns: 300px 1fr 140px 160px;
     gap: 15px;
     padding: 15px 0;
     border-bottom: 1px solid #ddd;
@@ -88,11 +88,38 @@
 }
 
 
-
-
 .cart-price {
-    font-weight: bold;
-	height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: 100%;
+}
+
+.price-unit {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    color: #3A3A3A;
+}
+
+.price-main {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 0.95;
+    color: #3A3A3A;
+    text-transform: uppercase;
+}
+
+.price-discount {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    color: #3A3A3A;
+}
+
+.price-discount b {
+    font-weight: 700;
 }
 
 .cart-actions {
@@ -108,6 +135,57 @@
 }
 
 </style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    document.querySelectorAll('.qty-box').forEach(box => {
+
+        const input = box.querySelector('.input-number');
+        const plus = box.querySelector('.qty-plus');
+        const minus = box.querySelector('.qty-minus');
+
+        const productId = box.dataset.productId;
+
+        async function post(url) {
+            await fetch(url, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken")
+                }
+            });
+
+            window.location.reload(); // najprostszy sync
+        }
+
+        plus.addEventListener('click', (e) => {
+            e.preventDefault();
+            post(`/products/cart/add/${productId}/`);
+        });
+
+        minus.addEventListener('click', (e) => {
+            e.preventDefault();
+            post(`/products/cart/subtract/${productId}/`);
+        });
+
+    });
+
+});
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie) {
+        document.cookie.split(';').forEach(c => {
+            c = c.trim();
+            if (c.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(c.substring(name.length + 1));
+            }
+        });
+    }
+    return cookieValue;
+}
+</script>
+
 <div class="bg-cream">
 	<div class="container  ">
 		
@@ -115,7 +193,7 @@
 			</div>
 
 			<div class="cart-info">
-				TOTAL: <b>{{ cart_items|length }} PRODUCTS </b>
+				TOTAL: <b>{{ cart_count }} PRODUCTS </b>
 			</div>
 			<div class="cart-info">
 				<img src="{% static 'products/images/InfoIcon.svg' %}" alt="Info" style="width:24=px; height:24px;" />
@@ -156,12 +234,15 @@
 						{{ item.product.description }}
 					</div>
 
-					<div class="qty-box">
-						<button class="btn-addytion" style="width=30px">
+					<div class="qty-box" data-product-id="{{ item.product.id }}">
+						<button type="button"  class="btn-addytion qty-minus" style="width=30px">
 							<img src="{% static 'products/images/substract.svg' %}" alt="Cart" style="width:24px; height:24px;" /> 
 						</button>
-						<input class= "input-number" type="number" value="1" min="1">
-						<button class="btn-secondary">
+						<input class="input-number"
+						   type="number"
+						   value="{{ item.quantity }}"
+						   min="1">
+						<button type="button"  class="btn-secondary qty-plus">
 							<img src="{% static 'products/images/add.svg' %}" alt="Cart" style="width:24px; height:24px;" /> 
 						</button>
 					</div>
@@ -169,7 +250,21 @@
 
 				<!-- PRICE -->
 				<div class="cart-price">
-					{{ item.product.price }} zł
+
+					<div class="price-unit">
+						{{ item.unit_price }} zł/szt.
+					</div>
+
+					<div class="price-main">
+						{{ item.subtotal }} zł
+					</div>
+
+					{% if item.product.discount > 0 %}
+					<div class="price-discount">
+						Rabat: <b>{{ item.product.discount }}%</b>
+					</div>
+					{% endif %}
+
 				</div>
 
 				<!-- ACTIONS -->
