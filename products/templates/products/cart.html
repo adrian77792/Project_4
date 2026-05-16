@@ -22,7 +22,7 @@
 
 <style>
 .cart-container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: auto;
    padding: 2px;
 	
@@ -65,10 +65,10 @@
 .cart-item {
     display: grid;
     grid-template-columns: 300px 1fr 140px 160px;
-    gap: 15px;
+    gap: 45px;
     padding: 15px 0;
     border-bottom: 1px solid #ddd;
-    align-items: center;
+    
 }
 
 .cart-img img {
@@ -78,13 +78,16 @@
 }
 
 .cart-name {
-    font-weight: bold;
+    font-weight: 600;
+	font-family: Fredoka;
+	height: 36px;
     color: #c94c2d;
 }
 
 .cart-meta {
     font-size: 12px;
     color: #666;
+	margin-bottom: 10px;
 }
 
 
@@ -132,6 +135,59 @@
 
 .cart-details {
 	height: 100%;
+}
+
+.cart-summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+	
+    gap: 16px;
+
+    width: 100%;
+    background: #fff;
+
+    box-sizing: border-box;
+}
+
+.cart-summary div {
+    font-size: 20px;
+	font-weight: 200;
+	font-family: Fredoka;
+}
+
+.cart-summary .total {
+    font-size: 32px;
+    font-family: Fredoka;
+	font-weight: 400;
+
+	
+	line-height: 100%;
+	letter-spacing: 0%;
+	text-align: right;
+	vertical-align: middle;
+
+}
+
+.checkout-btn {
+	max-width: 320px;
+    width: 320px;
+    height: 64px;
+
+    border: none;
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.summary-title {
+	font-family: Fredoka;
+    text-align: left;
+    width: 100%;
 }
 
 </style>
@@ -233,15 +289,16 @@ function getCookie(name) {
 					<div class="cart-meta">
 						{{ item.product.description }}
 					</div>
+					
 
+					
 					<div class="qty-box" data-product-id="{{ item.product.id }}">
 						<button type="button"  class="btn-addytion qty-minus" style="width=30px">
-							<img src="{% static 'products/images/substract.svg' %}" alt="Cart" style="width:24px; height:24px;" /> 
+							<img src="{% static 'products/images/substract.svg' %}" alt="Cart" style="width:16px; height:24px;" /> 
 						</button>
-						<input class="input-number"
-						   type="number"
-						   value="{{ item.quantity }}"
-						   min="1">
+						<div class="input-number" contenteditable="true">
+							{{ item.quantity }}
+						</div>
 						<button type="button"  class="btn-secondary qty-plus">
 							<img src="{% static 'products/images/add.svg' %}" alt="Cart" style="width:24px; height:24px;" /> 
 						</button>
@@ -269,24 +326,42 @@ function getCookie(name) {
 
 				<!-- ACTIONS -->
 				<div class="cart-actions">
-					<button class="btn-save">Do schowka</button>
+					<button class="btn-secondary">
+						<img src="{% static 'core/images/Heart.svg' %}" alt="Cart" style="width:24px; height:24px;" /> 
+						Do schowka
+					</button>
 
-					<form method="post" action="{% url 'products:cart_remove' item.product.id %}">
+					<form method="post" action="{% url 'products:cart_remove' item.product.id %}"  style="display:inline;">
 						{% csrf_token %}
-						<button class="btn-remove">Usuń z koszyka</button>
+						<button class="btn-primary" style="width:160px;">
+							<img src="{% static 'products/images/substract.svg' %}" alt="Cart" style="width:16px; height:24px; filter: brightness(0) invert(1);" /> 
+							Usuń z koszyka
+						</button>
 					</form>
 				</div>
 
 			</div>
 			{% endfor %}
 
-			<!-- SUMMARY -->
-			<div class="cart-summary">
-				<div>Łączna wartość: {{ total_price }} zł</div>
-				<div class="total">Do zapłaty: {{ total_price }} zł</div>
-
-				<button class="checkout-btn">Przejdź do płatności</button>
+			<div class="cart-item container" style="display: flex; justify-content: flex-end; border-bottom: 0px solid #ddd;">
+				<div>
+					<div style="color: var(--action_primary_default_color);" class="main-categories">Podsumowanie</div>
+				</div>
+			 </div>
+			<div class="cart-item cart-summary">
+				<div>Łączna wartość (bez rabatów): <span style="font-weight: 600;"> {{ total_full_price }} zł </span>  </div>
+				<div>Rabaty łącznie:  <span style="font-weight: 600; color: var(--action_secondary_default_color)">{{ total_discount_value }} zł </span>  </div>
+				<div>Koszt dostawy:  <span style="font-weight: 600;">  {{ delivery_cost }} zł </span>  </div>
+				
 			</div>
+			<div class="cart-item cart-summary">
+				<div class="total">Do zapłaty: <span style="font-weight: 600;">  {{ total_price }} zł </span> </div>
+			</div>
+			<div class="cart-item cart-summary " style="flex-direction: row; justify-content: right;">
+				<button class="btn-primary checkout-btn">Przejdź do płatności 
+					<img src="{% static 'products/images/Next.svg' %}" alt="Cart" style="width:32px; height:32px; filter: brightness(0) invert(1);" /> 
+				</button>
+			</div>	
 		</div>
 
 	</div>

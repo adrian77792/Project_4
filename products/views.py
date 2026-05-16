@@ -139,10 +139,16 @@ def view_cart(request):
     today = date.today()
     delivery_from = today + timedelta(days=3)
     delivery_to = today + timedelta(days=7)
+
     cart = request.session.get('cart', {})
     cart_items = []
+
     cart_count = sum(cart.values())
-    total_price = Decimal('0.00')
+
+    total_price = Decimal('0.00')          # po rabatach
+    total_full_price = Decimal('0.00')     # bez rabatów
+    total_discount_value = Decimal('0.00') # suma rabatów
+    delivery_cost = Decimal('20.00')
 
     invalid_keys = []
 
@@ -153,18 +159,27 @@ def view_cart(request):
             invalid_keys.append(product_id)
             continue
 
-        discount_multiplier = Decimal('1.0') - (Decimal(product.discount or 0) / Decimal('100'))
-        effective_price = product.price * discount_multiplier
-        effective_price = effective_price.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+        full_price = product.price * quantity
 
-        subtotal = (effective_price * quantity).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+        discount_multiplier = Decimal('1.0') - (Decimal(product.discount or 0) / Decimal('100'))
+        effective_unit_price = product.price * discount_multiplier
+        effective_unit_price = effective_unit_price.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+
+        subtotal = (effective_unit_price * quantity).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+        full_subtotal = full_price.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+
+        discount_value = (full_subtotal - subtotal).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+
         cart_items.append({
             'product': product,
             'quantity': quantity,
-            'unit_price': effective_price,
+            'unit_price': effective_unit_price,
             'subtotal': subtotal
         })
+
         total_price += subtotal
+        total_full_price += full_subtotal
+        total_discount_value += discount_value
 
     for key in invalid_keys:
         del cart[key]
@@ -179,17 +194,21 @@ def view_cart(request):
     ]
 
     latest_products = Product.objects.order_by('-id')[:4]
+    
+    total_price = total_price + delivery_cost
 
     return render(request, 'products/cart.html', {
         'latest_products': latest_products,
         'cart_items': cart_items,
         'cart_count': sum(cart.values()),
         'total_price': total_price,
+        'total_full_price': total_full_price,
+        'total_discount_value': total_discount_value,
+        'delivery_cost': delivery_cost,
         'breadcrumbs': breadcrumbs,
         "delivery_from": delivery_from,
         "delivery_to": delivery_to
     })
-    
 
 
 @require_POST
