@@ -25,6 +25,14 @@ def generate_breadcrumbs(request):
     return breadcrumbs
 
 
+def special(request):
+
+    breadcrumbs = generate_breadcrumbs(request)
+    products = Product.objects.all()
+    discounted_products = [p for p in products if p.discount]
+    return render(request, "core/special.html", 
+                  {"products":products, "discounted_products":discounted_products, "breadcrumbs": breadcrumbs,})
+
 def home(request):
     cart = request.session.get('cart', {})
     cart_count = sum(cart.values())
@@ -70,7 +78,8 @@ def contact(request):
     
 def news_list(request):
     news_list = News.objects.all().order_by('-created_at')
-
+    breadcrumbs = generate_breadcrumbs(request)
     return render(request, 'core/news.html', {
+        "breadcrumbs": breadcrumbs,
         'news_list': news_list
     })    

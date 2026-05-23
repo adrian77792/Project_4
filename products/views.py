@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
+from products.models import Product
 from .models import Product
 from .models import Product
 from .models import Category
@@ -8,10 +9,12 @@ from datetime import date, timedelta
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 
+
 def product_list(request):
     products = Product.objects.all()
     return render(request, "products/product_list.html",
-                  {"products":products})
+                  {"products":products}
+                  )
                   
 
 def product_detail(request, category_slug, slug):
